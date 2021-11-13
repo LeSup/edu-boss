@@ -2,6 +2,10 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import ElementUI from 'element-ui'
+import './styles/index.scss'
+
+Vue.use(ElementUI)
 
 // 关闭生产环境提示
 Vue.config.productionTip = false
