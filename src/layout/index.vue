@@ -39,11 +39,15 @@ export default Vue.extend({
   background: #d3dce6;
 }
 
-.el-header {
-  background: #fff;
-}
+.el-container {
+  height: 100vh;
 
-.el-main {
-  background: #e9eef3;
+  .el-header {
+    background: #fff;
+  }
+
+  .el-main {
+    background: #e9eef3;
+  }
 }
 </style>

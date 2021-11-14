@@ -1,6 +1,7 @@
 /**
  * 用户相关请求模块
  */
+import { AxiosPromise } from 'axios'
 import request from '@/utils/request'
 import qs from 'qs'
 
@@ -9,7 +10,8 @@ interface User {
   password: string
 }
 
-export const login = (data: User) => {
+// 用户登录
+export const login = (data: User): AxiosPromise => {
   return request({
     method: 'POST',
     url: '/front/user/login',
@@ -22,9 +24,30 @@ export const login = (data: User) => {
   })
 }
 
-export const getUserInfo = () => {
+// 获取用户信息
+export const getUserInfo = (): AxiosPromise => {
   return request({
     method: 'GET',
     url: '/front/user/getInfo'
+  })
+}
+
+// 分页查询用户信息
+export const getUserPages = (data: any): AxiosPromise => {
+  return request({
+    method: 'POST',
+    url: '/boss/user/getUserPages',
+    data
+  })
+}
+
+// 封禁用户
+export const forbidUser = (userId: string | number): AxiosPromise => {
+  return request({
+    method: 'POST',
+    url: '/boss/user/forbidUser',
+    params: {
+      userId
+    }
   })
 }

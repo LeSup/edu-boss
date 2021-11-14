@@ -67,9 +67,9 @@ export default Vue.extend({
         }
       } catch (err) {
         console.log('登录失败', err)
+      } finally {
+        this.loading = false
       }
-
-      this.loading = false
     }
   }
 })

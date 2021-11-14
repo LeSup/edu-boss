@@ -1,17 +1,17 @@
 <template>
-  <div class="resource">
-    <resource-list />
+  <div class="menu-create">
+    <create-or-update></create-or-update>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import ResourceList from './components/ResourceList.vue'
+import createOrUpdate from './components/CreateOrEdit.vue'
 
 export default Vue.extend({
-  name: 'ResourceIndex',
+  name: 'MenuCreate',
   components: {
-    ResourceList
+    createOrUpdate
   }
 })
 </script>

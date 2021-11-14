@@ -47,8 +47,8 @@ request.interceptors.request.use(function (config) {
 })
 
 // 响应拦截器
-let isRefreshing = false
-let requests: any[] = []
+let isRefreshing = false // 控制刷新 token 的状态
+let requests: any[] = [] // 存储刷新 token 期间过来的 401 请求
 request.interceptors.response.use(function (response) { // 状态码为 2xx 都会进入这里
   return response
 }, async function (error) { // 超出 2xx 状态码都都执行这里
@@ -66,25 +66,29 @@ request.interceptors.response.use(function (response) { // 状态码为 2xx 都�
 
       // 刷新 token
       if (!isRefreshing) {
-        isRefreshing = true
+        isRefreshing = true // 开启刷新状态
+        // 尝试刷新获取新的 token
         return refreshToken().then(res => {
           const { content, success } = res.data
           if (!success) {
             throw new Error('刷新 Token 失败')
           }
           store.commit('setUser', content)
+          // 把 requests 队列中的请求重新发出去
           requests.forEach(cb => cb())
+          // 重置 requests 数组
           requests = []
           return request(error.config)
-        }).then(error => {
+        }).catch(error => {
           store.commit('setUser', null)
           redirectLogin()
           return Promise.reject(error)
         }).finally(() => {
-          isRefreshing = false
+          isRefreshing = false // 重置刷新状态
         })
       }
 
+      // 刷新状态下，把请求挂起放到 requests 数组中
       return new Promise(resolve => {
         requests.push(() => {
           resolve(request(error.config))
