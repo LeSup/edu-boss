@@ -62,7 +62,7 @@ const routes: Array<RouteConfig> = [
         component: () => import(/* webpackChunkName: 'resource' */ '@/views/resource/index.vue')
       },
       {
-        path: '/resourceCategory',
+        path: '/resource-category',
         name: 'resource-category',
         component: () => import(/* webpackChunkName: 'resource-category' */ '@/views/resource/category.vue')
       },
@@ -70,6 +70,29 @@ const routes: Array<RouteConfig> = [
         path: '/course',
         name: 'course',
         component: () => import(/* webpackChunkName: 'course' */ '@/views/course/index.vue')
+      },
+      {
+        path: '/course/create',
+        name: 'course-create',
+        component: () => import(/* webpackChunkName: 'course-create-edit' */ '@/views/course/create.vue')
+      },
+      {
+        path: '/course/:id/edit',
+        name: 'course-edit',
+        component: () => import(/* webpackChunkName: 'course-create-edit' */ '@/views/course/edit.vue'),
+        props: true // 将路由路径参数映射到组件的 props 数据中
+      },
+      {
+        path: '/course/:courseId/section',
+        name: 'course-section',
+        component: () => import(/* webpackChunkName: 'course-section' */ '@/views/course/section.vue'),
+        props: true
+      },
+      {
+        path: '/course/:lessonId/video',
+        name: 'course-video',
+        component: () => import(/* webpackChunkName: 'course-video' */ '@/views/course/video.vue'),
+        props: true
       },
       {
         path: '/user',
